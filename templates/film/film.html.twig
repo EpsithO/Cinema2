@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des films</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Liste des films</h1>
+
+    {% for film in films %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ film.titre }}</h5>
+                <a href="{{ path('film_detail', {'id': film.id}) }}" class="btn btn-primary">Détail</a>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if totalPages > 1 %}
+        <ul class="pagination">
+            {% for page in 1..totalPages %}
+                <li class="page-item {{ page == currentPage ? 'active' }}">
+                    <a class="page-link" href="{{ path('film_list', {'page': page}) }}">{{ page }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
